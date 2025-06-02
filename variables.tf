@@ -52,6 +52,22 @@ variable "website_bucket_acl" {
   default     = "private"
 }
 
+variable "website_bucket_public_access_block" {
+  description = "(Optional) Controls the public access block."
+  type = object({
+    ignore_public_acls      = optional(string, true)
+    block_public_acls       = optional(string, true)
+    restrict_public_buckets = optional(string, true)
+    block_public_policy     = optional(string, true)
+  })
+  default = {
+    ignore_public_acls      = true
+    block_public_acls       = true
+    restrict_public_buckets = true
+    block_public_policy     = true
+  }
+}
+
 variable "website_bucket_force_destroy" {
   description = "(Optional, Default:false) A boolean that indicates all objects (including any locked objects) should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
   type        = bool
